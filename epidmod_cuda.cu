@@ -109,7 +109,6 @@ __global__ void calcUpdStates(
 
 					if(isAdd)
 					{
-						if(state[randConns[rndInd]] == 1) { ch *= 1 - expChance; }
 						if(state[randConns[rndInd]] == 2) { ch *= 1 - infChance; }
 					}
 				}
