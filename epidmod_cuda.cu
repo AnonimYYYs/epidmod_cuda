@@ -75,7 +75,6 @@ __global__ void calcUpdStates(
 	int randConnsAmount,
 	int peopleAmount,
 	int totalThreads,
-	float expChance,
 	float infChance
 ){
 	int startIndex = threadIdx.x + blockIdx.x * blockDim.x;
@@ -92,7 +91,6 @@ __global__ void calcUpdStates(
 			float ch = 1.0f;
 			for(unsigned int ind = connAddr[i]; ind < connAddr[i] + connSize[i]; ind++)
 			{
-				if(state[conns[ind]] == 1) { ch *= 1 - expChance; }
 				if(state[conns[ind]] == 2) { ch *= 1 - infChance; }
 			}
 			for(unsigned int rndInd = i * randConnsAmount; rndInd < (i + 1) * randConnsAmount; rndInd++)
@@ -177,8 +175,7 @@ int main()
 
 	float wsgk = 0.2f;
 
-	float infCatch = 0.006975f;
-	float expCatch = 0.0558f;
+	float infCatch = 0.0558f;
 
 	unsigned int repeatTime = 50; // days
 
@@ -312,7 +309,6 @@ int main()
 				randConnsAmount,
 				peopleAmount,
 				totalThreads,
-				expCatch,
 				infCatch
 			);
 
